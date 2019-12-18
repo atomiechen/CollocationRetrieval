@@ -4,3 +4,6 @@ __pycache__
 venv/
 instance/
 *.pyc
+data
+lucene-idx
+src-thulac/models
