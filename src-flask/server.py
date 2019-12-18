@@ -3,7 +3,7 @@ from flask import (
 )
 
 from backend import (
-    lucene, Searcher, search_query, read_stopwords, read_pos_translation, pos_list_string, 
+    lucene, Searcher, search_query, read_stopwords, read_pos_translation, pos_list_string, parse_win,
     idxdir_path, file_stopwords, file_pos
 )
 
@@ -13,14 +13,15 @@ app = Flask(__name__, template_folder="", static_folder="")
 @app.route('/')
 def index():
     query = request.args.get("query")
-    print(f"query: {query}")
+    print(f"### query: {query}")
     if query:
         ## ---start--- MUST add for lucene functionality
         vm_env = lucene.getVMEnv()
         vm_env.attachCurrentThread()
         ## ---end---
 
-        win = 5
+        win_str = request.args.get("win")
+        win = parse_win(win_str)
         pos = []
         checkbox_state = {}
         if not request.args.get("cb_all"):
@@ -33,23 +34,18 @@ def index():
                 pos_t = key[3:]
                 pos.append(pos_t)
                 checkbox_state[key] = True
-        print(f"pos: {pos}")
-        print(f"win: {win}")
+        print(f"### pos: {pos}")
+        print(f"### win: {win}")
         counter, pos_dict = search_query(query, searcher, pos, win, stopwords)
         ans = counter.most_common(n)
 
         ## display answers
         answer_list = []
-        term_list = []
-        pos_list = []
-        print(f"top {n} answers:")
-        for idx, item in enumerate(ans):
-            print(f"\t{item[0]}     \t\t    {pos_list_string(pos_dict[item[0]], pos_trans)}")
+        print(f"### get top {len(ans)} answers")
+        for item in ans:
             ans = (item[0], pos_list_string(pos_dict[item[0]], pos_trans))
             answer_list.append(ans)
-            # term_list.append()
-            # pos_list.append(pos_list_string(pos_dict[item[0]], pos_trans))
-        return render_template("result.html", answer_list=answer_list, query_str=query, **checkbox_state)
+        return render_template("result.html", answer_list=answer_list, query_str=query, win=win if win != 0 else "", **checkbox_state)
 
     return render_template("index.html")
 

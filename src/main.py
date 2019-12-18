@@ -196,7 +196,7 @@ def main(args):
 		elif query:
 			counter, pos_dict = search_query(query, searcher, pos, win, stopwords)
 			ans = counter.most_common(n)
-			print(f"top {n} answers:")
+			print(f"top {len(ans)} answers:")
 			for item in ans:
 				print(f"\t{item[0]}     \t\t    {pos_list_string(pos_dict[item[0]], pos_trans)}")
 		print()

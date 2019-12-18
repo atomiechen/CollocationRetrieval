@@ -111,6 +111,23 @@ h1 {
     background: #2f3640;
 }
 
+.win-txt {
+    border: none;
+    background: none;
+    outline: none;
+    padding: 0;
+    color: white;
+    font-size: 16px;
+    width: 55px;
+    height: 20px;
+    font-weight: bold;
+    text-align: right;
+}
+
+.win-txt:hover, :focus {
+    border-bottom: 2px solid gray;
+}
+
 .result-table {
     display: inline-block;
     vertical-align: top;

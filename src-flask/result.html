@@ -11,7 +11,7 @@
 			}
 
 			.left-container {
-				top: 40%;
+				top: 39%;
 				left: 30%;
 			}
 
@@ -69,7 +69,7 @@
 		<div class="left-container">
             <form method="GET">
 				<div class="buscar-caja">
-					<input type="text" name="query" class="buscar-txt" placeholder="Type to search" value="{{query_str}}"/>
+					<input type="text" name="query" class="buscar-txt" placeholder="Type to search" value="{{ query_str }}" required/>
 					<input class="buscar-btn" type="submit" value="">
 				</div>
 				<div class="dropdown">
@@ -279,6 +279,9 @@
 								<label>x/其它</label>
 							</div>
 						</div>
+						<br><br>
+						<label>Window Size / 上下文窗口大小</label>
+						<input type="text" name="win" class="win-txt" placeholder="unlimit" value="{{ win }}" oninput="value = value.replace(/[^0-9]/g,'')"/>
 					</div>
 				</div>
             </form>
