@@ -6,6 +6,8 @@
 
 ## 代码运行
 
+### 命令行交互
+
 代码在`src`文件夹下，其中：
 
 - `main.py`是检索程序入口，提供了一个命令行交互界面，其运行方式为：
@@ -74,6 +76,35 @@
     -i INDEX            path of lucene index directory (default: ../lucene-idx)
     -f FILE [FILE ...]  a list of files (override DIR) (default: None)
   ```
+
+### Web交互
+
+代码在`src-flask`下。其中：
+
+- `server.py`是主入口，需要在虚拟环境下运行，在根目录下开启虚拟环境：
+
+  ```sh
+  . venv/bin/activate
+  ```
+
+  运行网页服务器：
+
+  ```
+  cd src-flask
+  python3 server.py
+  ```
+
+  或者先设置环境变量后用flask运行：
+
+  ```
+  cd src-flask
+  export FLASK_APP=server.py
+  flask run
+  ```
+
+- `backend.py`同`src/main.py`，是后端代码，调用了Lucene
+
+- 其余html和css文件用于构建网页前端
 
 
 

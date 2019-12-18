@@ -12,7 +12,12 @@
 
 			.left-container {
 				top: 40%;
-				left: 20%;
+				left: 30%;
+			}
+
+			.right-container {
+				top: 59%;
+				left: 75%;
 			}
 
 			.buscar-txt {
@@ -284,6 +289,38 @@
             </form>
 		</div>
 		<div class="right-container">
+			<table class="result-table">
+				<tr>
+					<th>No.</th>
+					<th>Term</th>
+					<th>PoS</th>
+				</tr>
+				{% for ans in answer_list %}
+				{% if loop.index <= 10 %}
+				<tr>
+					<td>{{ loop.index }}</td>
+					<td>{{ ans[0] }}</td>
+					<td>{{ ans[1] }}</td>
+				</tr>
+				{% endif %}
+				{% endfor %}
+			</table>
+			{% if answer_list|length > 10 %}
+			<table class="result-table">
+				<tr>
+					<th>No.</th>
+					<th>Term</th>
+					<th>PoS</th>
+				</tr>
+				{% for i in range(10, answer_list|length) %}
+				<tr>
+					<td>{{ i+1 }}</td>
+					<td>{{ answer_list[i][0] }}</td>
+					<td>{{ answer_list[i][1] }}</td>
+				</tr>
+				{% endfor %}
+			</table>
+			{% endif %}
 		</div>
 	</body>
 </html>

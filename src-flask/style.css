@@ -79,8 +79,8 @@ h1 {
 .dropdown {
     background: #2f3640;
     position: relative;
-    transform: translate(-50%, 15px);
     left: 50%;
+    transform: translate(-50%, 15px);
     height: 12px;
     width: 60px;
     border-radius: 40px;
@@ -107,6 +107,19 @@ h1 {
 .dropdown:hover > .dropdown-content{
     display: block;
     background: #2f3640;
+}
+
+.result-table {
+    display: block;
+    float: left;
+    background: #2f3640;
+    color: white;
+    text-align: center;
+    border-radius: 15px;
+    padding: 12px;
+    margin: 10px;
+    position: relative;
+    width: max-content;
 }
 
 /* 对多选控件限制宽度 */

@@ -39,14 +39,17 @@ def index():
         ans = counter.most_common(n)
 
         ## display answers
+        answer_list = []
         term_list = []
         pos_list = []
         print(f"top {n} answers:")
-        for item in ans:
+        for idx, item in enumerate(ans):
             print(f"\t{item[0]}     \t\t    {pos_list_string(pos_dict[item[0]], pos_trans)}")
-            term_list.append(item[0])
-            pos_list.append(pos_list_string(pos_dict[item[0]], pos_trans))
-        return render_template("result.html", query_str=query, **checkbox_state)
+            ans = (item[0], pos_list_string(pos_dict[item[0]], pos_trans))
+            answer_list.append(ans)
+            # term_list.append()
+            # pos_list.append(pos_list_string(pos_dict[item[0]], pos_trans))
+        return render_template("result.html", answer_list=answer_list, query_str=query, **checkbox_state)
 
     return render_template("index.html")
 
