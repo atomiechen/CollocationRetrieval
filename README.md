@@ -186,3 +186,13 @@ PyLucene官方下载及教程：http://lucene.apache.org/pylucene/install.html
 
 - 安装完之后可以把屏蔽某版本的JDK的`Info.plist`改回原名，实际使用Lucene时只需要JVM虚拟机
 
+### Flask
+
+如果需要运行Web端应用，则需要安装Flask框架：
+
+```sh
+pip install Flask
+```
+
+参考：https://dormousehole.readthedocs.io/en/latest/installation.html#installation
+

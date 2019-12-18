@@ -25,9 +25,11 @@ h1 {
 
 .right-container {
     position: absolute;
-    top: 50%;
-    left: 70%;
+    top: 59%;
+    left: 75%;
     transform: translate(-50%, -50%);
+    width: 50%;
+    text-align: center;
 }
 
 .buscar-caja {
@@ -78,7 +80,7 @@ h1 {
 
 .dropdown {
     background: #2f3640;
-    position: relative;
+    position: absolute;
     left: 50%;
     transform: translate(-50%, 15px);
     height: 12px;
@@ -110,8 +112,8 @@ h1 {
 }
 
 .result-table {
-    display: block;
-    float: left;
+    display: inline-block;
+    vertical-align: top;
     background: #2f3640;
     color: white;
     text-align: center;
@@ -119,7 +121,6 @@ h1 {
     padding: 12px;
     margin: 10px;
     position: relative;
-    width: max-content;
 }
 
 /* 对多选控件限制宽度 */
