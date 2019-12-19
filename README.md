@@ -1,10 +1,51 @@
 # README
 
-陈伟浩，2016013288
+本项目实现了中文搭配检索系统其特点及功能如下：
+
+- 大规模数据：本检索系统所收录的数据为SogouT数据中的一部分，具体索引的数据文件包括：`Sogou_0000`、`Sogou_0001`、`Sogou_0002`、`Sogou_0010`、`Sogou_0011`、`Sogou_0012`，共有218669988行数据（文档数），索引+数据共有32.5G
+- 完成给定检索词，查询出其常见搭配，并支持：
+  - 同时给定多个检索词（空格分隔）
+  - 指定返回候选词的词性
+  - 指定返回候选词在文本中与检索词的距离（上下文窗口大小）
+- 命令行交互界面，支持动态调整：候选词词性、上下文窗口大小、返回结果数量
+- Web图形交互界面，返回20个结果，支持调整：候选词词性、上下文窗口大小
+
+![cr_demo_cp](img/cr_demo_cp.gif)
 
 
 
 ## 代码运行
+
+### Web交互
+
+代码在`src-flask`下。其中：
+
+- `server.py`是主入口，需要在虚拟环境下运行，在根目录下开启虚拟环境：
+
+  ```sh
+  . venv/bin/activate
+  ```
+
+  运行网页服务器：
+
+  ```
+  cd src-flask
+  python3 server.py
+  ```
+
+  或者先设置环境变量后用flask运行：
+
+  ```
+  cd src-flask
+  export FLASK_APP=server.py
+  flask run
+  ```
+
+- `backend.py`同`src/main.py`，是后端代码，调用了Lucene
+
+- 其余html和css文件用于构建网页前端
+
+
 
 ### 命令行交互
 
@@ -77,35 +118,6 @@
     -f FILE [FILE ...]  a list of files (override DIR) (default: None)
   ```
 
-### Web交互
-
-代码在`src-flask`下。其中：
-
-- `server.py`是主入口，需要在虚拟环境下运行，在根目录下开启虚拟环境：
-
-  ```sh
-  . venv/bin/activate
-  ```
-
-  运行网页服务器：
-
-  ```
-  cd src-flask
-  python3 server.py
-  ```
-
-  或者先设置环境变量后用flask运行：
-
-  ```
-  cd src-flask
-  export FLASK_APP=server.py
-  flask run
-  ```
-
-- `backend.py`同`src/main.py`，是后端代码，调用了Lucene
-
-- 其余html和css文件用于构建网页前端
-
 
 
 ## 数据存放
@@ -126,7 +138,7 @@
 
   - 原始语料数据可放在`data`文件夹下进行处理，处理后可删除
 
-- Lucene生成的索引数据在`lucene-idx`文件夹下
+- Lucene生成的索引数据**需要**放在`lucene-idx`文件夹下
 
 
 
