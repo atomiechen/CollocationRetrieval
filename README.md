@@ -10,7 +10,7 @@
 - 命令行交互界面，支持动态调整：候选词词性、上下文窗口大小、返回结果数量
 - Web图形交互界面，返回20个结果，支持调整：候选词词性、上下文窗口大小
 
-![cr_demo_cp](img/cr_demo_cp.gif)
+<p align="center"><img src="img/cr_demo_cp.gif" alt="cr_demo_cp" /></p>
 
 
 
