@@ -156,6 +156,9 @@ def pos_list_string(pos_list, pos_trans):
 		ans += " "
 	return ans
 
+def check_w2v(w2v):
+	print(f"show word2vec results: {w2v}")
+
 def main(args):
 	lucene.initVM()
 	searcher = Searcher(args.index)
@@ -166,6 +169,10 @@ def main(args):
 
 	n = 20
 	quit_words = ["q", "quit", "exit"]
+	w2v = args.w2v
+	check_w2v(w2v)
+	from word2vec import w2v_cal
+
 
 	while True:
 		query = input("Input query (type ? to get command list)>>> ")
@@ -176,6 +183,7 @@ def main(args):
 			print("type <p> for part of speech")
 			print("type <w> for window size")
 			print("type <n> for top n answers")
+			print("type <w2v> to activate/deactivate word2vec results")
 			print("type <q>, <quit> or <exit> to exit")
 			print()
 			continue
@@ -191,6 +199,9 @@ def main(args):
 		elif query == 'n':
 			n = input("Input top n number (must be positive)>>> ")
 			n = parse_n(n)
+		elif query == 'w2v':
+			w2v = not w2v
+			check_w2v(w2v)
 		elif query in quit_words:
 			return
 		elif query:
@@ -199,6 +210,14 @@ def main(args):
 			print(f"top {len(ans)} answers:")
 			for item in ans:
 				print(f"\t{item[0]}     \t\t    {pos_list_string(pos_dict[item[0]], pos_trans)}")
+			if w2v:
+				ans = w2v_cal(query, searcher, win, stopwords)
+				if ans:
+					print("word2vec results:")
+					for item in ans:
+						print(f"\t{item[0]}\t\t{item[1]}")
+				else:
+					print("term not in word2vec vocabulary")
 		print()
 
 
@@ -208,5 +227,6 @@ if __name__ == '__main__':
 	parser.add_argument('-i', dest='index', action='store', default=idxdir_path, help='path of lucene index directory')
 	parser.add_argument('-p', dest='pos', action='store', default="", help='part of speech: v/n/a/...')
 	parser.add_argument('-w', dest='win', action='store', type=int, default=5, help='window size, at least 3 to be valid')
+	parser.add_argument('-w2v', dest='w2v', action='store_true', default=False, help="whether to show word2vec results")
 	args = parser.parse_args()
 	main(args)
